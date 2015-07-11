@@ -1,0 +1,48 @@
+#---------------------------------------------------------------------------------
+.SUFFIXES:
+#---------------------------------------------------------------------------------
+
+TOPDIR	:=	$(CURDIR)
+OUTBIN	:=	docs/d3js-api.zip
+OUTXML	:=	docs/d3js.xml
+MAIN	:=	js.D3Doc
+
+#---------------------------------------------------------------------------------
+
+LEFTPAREN	:=(
+RIGHTPAREN	:=)
+EMPTY:=
+SPACE:= $(EMPTY) $(EMPTY)
+
+#---------------------------------------------------------------------------------
+#
+#---------------------------------------------------------------------------------
+
+TITLE	:=	"D3js API"
+THEME	:=	default_zhcn
+HXFILES :=	$(shell find js -type f \( -name "*.hx" \))
+#HXFILES := $(wildcard js/*.hx) $(wildcard js/*/*.hx) $(wildcard js/*/*/*.hx)
+#---------------------------------------------------------------------------------
+
+IN := d3 D3 Callb
+INCLUDE := $(addprefix -in$(SPACE)js.,$(IN))
+
+.PHONY: all clean
+#---------------------------------------------------------------------------------
+
+all: $(OUTBIN)
+	@echo finished
+
+# make clean -f Makefile.docs	
+clean:
+	@echo clean ...
+	@rm -rf ./docs
+
+	
+$(OUTBIN): $(OUTXML)
+	@rm -f $@
+	haxelib run dox --title $(TITLE) -theme $(THEME) -i $(dir $@) -o $@ $(INCLUDE) -ex $(MAIN) --toplevel-package js
+	
+$(OUTXML): $(HXFILES)
+	@rm -f $@
+	haxe --macro include\(\'js.d3\'\) -D doc-gen -dce no --no-output -main $(MAIN) -js docs.js -xml $@

@@ -1,0 +1,5 @@
+*.hss linguist-language=CSS
+bin/* linguist-vendored
+
+style.hss linguist-vendored=false
+index.html linguist-vendored=false
