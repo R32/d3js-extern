@@ -34,8 +34,8 @@ https://github.com/mbostock/d3/wiki/Selections
 	The specified name may have a namespace prefix, such as xlink:href, to specify an "href" attribute in the XLink namespace. By default, D3 supports svg, xhtml, xlink, xml, and xmlns namespaces. Additional namespaces can be registered by adding them to `d3.ns.prefix` using dot notation.
 	*/
 	@:overload(function(name:String):Null<String> { } )
-	@:overload(function(name:String, cb:Callb<Dynamic->Int->Int->Null<String>>):Selection { } )	
-	function attr(name:String, value:Null<String>):Selection;
+	@:overload(function(name:String, cb:Callb<Dynamic->Int->Int->Primitive>):Selection { } )	
+	function attr(name:String, value:Primitive):Selection;
 	
 	
 	/**
@@ -64,8 +64,8 @@ https://github.com/mbostock/d3/wiki/Selections
 	*/
 	@:overload(function(name:String):String { } )
 	@:overload(function(obj: { } ):Selection { } )
-	@:overload(function(name:String, cb:Callb<Dynamic->Int->Int->Null<String>>,?priority:String):Selection { } )
-	function style(name:String, value:Null<String>, ?priority:String):Selection;
+	@:overload(function(name:String, cb:Callb<Dynamic->Int->Int->Primitive>,?priority:String):Selection { } )
+	function style(name:String, value:Primitive, ?priority:String):Selection;
 	
 	
 	/**
@@ -83,8 +83,8 @@ https://github.com/mbostock/d3/wiki/Selections
 	*/
 	@:overload(function(name:String):Dynamic { } )
 	@:overload(function(obj: { } ):Selection { } )
-	@:overload(function(name:String, cb:Callb<Dynamic->Int->Int->Dynamic>):Selection { } )
-	function property(name:String, value:Dynamic):Selection;
+	@:overload(function(name:String, cb:Callb<Dynamic->Int->Int->Primitive>):Selection { } )
+	function property(name:String, value:Primitive):Selection;
 
 	
 	/**

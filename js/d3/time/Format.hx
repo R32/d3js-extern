@@ -139,7 +139,7 @@ format(new Date(2011, 0, 1)); // returns a string
 	
 	zh-CN: 返回一个函数, 当给这个函数传入一个 Date 类型参数时, 将返回第一个 返回值不为 `false|null|0|""` 相对应的项,如果全都没匹配,很可能将抛出错误.
 	*/
-	static function multi(formats:Array<DFilter>):Date-> String;
+	static function multi(formats:Array<DFilter>):Date->Primitive;
 	
 	
 	/**
