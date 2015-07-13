@@ -1,4 +1,4 @@
-package js.d3;
+package js.d3.arrays;
 
 /**
 Nesting allows elements in an array to be grouped into a hierarchical tree structure; think of it like the GROUP BY operator in SQL, except you can have multiple levels of grouping, and the resulting output is a tree rather than a flat table. The levels in the tree are specified by key functions. The leaf nodes of the tree can be sorted by value, while the internal nodes can be sorted by key. An optional rollup function will collapse the elements in each leaf node using a summary function. The nest operator (the object returned by d3.nest) is reusable, and does not retain any references to the data that is nested.

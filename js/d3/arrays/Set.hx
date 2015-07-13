@@ -1,4 +1,4 @@
-package js.d3;
+package js.d3.arrays;
 
 
 extern class Set{

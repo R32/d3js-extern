@@ -3,31 +3,35 @@ package js;
 
 
 
+
 import js.html.Node;
 import haxe.Constraints.Function;
 
 import js.d3.Selection;
 import js.d3.Transition;
 import js.d3.Transform;
-import js.d3.Map;
-import js.d3.Set;
-import js.d3.Nest;
+import js.d3.arrays.Map;
+import js.d3.arrays.Set;
+import js.d3.arrays.Nest;
 import js.d3.FlxEase;
 import js.d3.Color;
 import js.d3.Locale;
 import js.d3.Time;
-import js.d3.time.Format;
+import js.d3.Behavior;
+import js.d3.Geo;
 
 typedef Number = Null<haxe.extern.EitherType<Int,Float>>;
 
 /**
- 
+https://github.com/mbostock/d3/wiki/API-Reference 
 */
 @:native("d3")
 extern class D3{
 	
 	static var version(default,null):String;
 	
+	
+	//-=-=-=-=-=-=-=-=- Selections -=-=-=-=-=-=-=-=-
 	/**
 	Stores the current event, if any. This global is registered during an event listener callback with the on operator. The current event is reset after the listener is notified in a finally block. This allows the listener function to have the same form as other operator functions, being passed the current datum d and index i.
 
@@ -89,9 +93,12 @@ extern class D3{
 	```
 	*/
 	static var selection(default, null):Void->Selection;				//	haxe.Constraints.Function;
-
 	
-	//-=-=-=-=-=-=-=-=-= Array -=-=-=-=-=-=-=-=-=-=-
+	// TODO: -=-=-=-=-=-=-=-=- Internals -=-=-=-=-=-=-=-=-
+	
+	// TODO: -=-=-=-=-=-=-=-=- Math -=-=-=-=-=-=-=-=-
+	
+	// -=-=-=-=-=-=-=-=- Working with Arrays -=-=-=-=-=-=-=-=-
 	
 	/**
 	Returns -1 if a is less than b, or 1 if a is greater than b, or 0. This is the comparator function for natural order, and can be used in conjunction with the built-in array sort method to arrange elements in ascending order. 
@@ -328,7 +335,7 @@ extern class D3{
 	static function nest():Nest;
 	
 	
-	//-=-=-=-=-=-=-=-=-=- Transition -=-=-=-=-=-=-=-=-=-=-=-
+	//-=-=-=-=-=-=-=-=- Transitions -=-=-=-=-=-=-=-=-
 	
 	
 	/**	
@@ -351,8 +358,41 @@ extern class D3{
 	
 	static function ease(type:EaseType, rest:haxe.extern.Rest<Float>):EaseFunction;
 	
+
 	
-	// -=-=-=-=-=-=-=-=-=- Interpolation -=-=-=-=-=-=-=-=-=-
+	/**
+	Start a custom animation timer, invoking the specified function repeatedly until it returns true. There is no way to cancel the timer after it starts, so make sure your timer function returns true when done!
+	
+	An optional numeric delay in milliseconds may be specified when the given function should only be invoked after a delay. The delay is relative to the specified time in milliseconds since UNIX epoch; if time is not specified, it defaults to Date.now.
+	
+	You may use delay and time to specify relative and absolute moments in time when the function should start being invoked. For example, a calendar notification might be coded as:
+	
+	```js
+	// four hours before midnight October 29 (months are zero-based)
+	d3.timer(notify, -4 * 1000 * 60 * 60, +new Date(2012, 09, 29));
+	
+	// timer(Float->Bool, delay = 0, time = Date.now()):Void{
+	//	 this = {t=>arg_time, c=>arg_func, f=>[prev_return_value=false], n=>[null=sub_timer]	}
+	//}
+	```
+	
+	Note that if d3.timer is called within the callback of another timer, the new timer will be invoked immediately at the end of the current frame (if active as determined by the specified delay and time), rather than waiting until the next frame.
+	
+	zh_CN: 注意: 如果一个新 d3.timer 在 另一个 timer 回调中被调用, 那么这个新 timer 将在结束当前 timer 才开始调用.
+	*/
+	static function timer(func:Callb<Float->Dynamic>, delay:Float = 0, ?time:Float):Void;
+	
+	/**
+	equivalent to `d3.timer.flush`
+	
+	Immediately execute (invoke once) any active timers. Normally, zero-delay transitions are executed after an instantaneous delay (<10ms). This can cause a brief flicker if the browser renders the page twice: once at the end of the first event loop, then again immediately on the first timer callback. By flushing the timer queue at the end of the first event loop, you can run any zero-delay transitions immediately and avoid the flicker.
+	
+	zh_CN: 立刻执行当前没有延迟的计时。可用于处理闪屏问题
+	*/
+	inline static function timerFlush():Void untyped D3.timer.flush();
+	
+	
+	// --------------- Interpolation ---------------
 	
 	/**
 	D3 has many built-in interpolators to simplify the transitioning of arbitrary values; an interpolator is a function that maps a parametric value t in the domain [0,1] to a color, number or arbitrary value. 
@@ -457,9 +497,6 @@ extern class D3{
 	*/
 	static function interpolateZoom(a:Array<Float>, b:Array<Float>):InterpFunction<Array<Float>>;
 	
-	// TODO: [d3.geo.interpolate](https://github.com/mbostock/d3/wiki/Geo-Paths#interpolate).
-	static var geo(default, null):Dynamic;
-	
 	/**
 	The array of built-in interpolator factories, as used by d3.interpolate. Additional interpolator factories may be pushed onto the end of this array. Each factory may return an interpolator, if it supports interpolating the two specified input values; otherwise, the factory should return a falsey value and other interpolators will be tried.
 	
@@ -486,6 +523,8 @@ extern class D3{
 	
 	/**
 	A d3.color base type is provided if you want to extend D3 with additional color spaces. This type enables automatic RGB interpolation by d3.interpolate (detected via instanceof d3.color). 
+	
+	zh-CN: 空函数,仅用于检测 instanceof
 	*/
 	static var color:Void->Void;
 	
@@ -537,8 +576,8 @@ extern class D3{
 	static function lab(l:Float, a:Float, b:Float):Lab;
 	
 	
-	// -=-=-=-=-=-=-=-=-=- String Formatting  -=-=-=-=-=-=-=-=-=-
 	// https://github.com/mbostock/d3/wiki/Formatting#d3_format
+	// -=-=-=-=-=-=-=-=- String Formatting  -=-=-=-=-=-=-=-=-
 	
 	/**
 	Formatting numbers is one of those things you don't normally think about until an ugly "0.30000000000000004" appears on your axis labels. Also, maybe you want to group thousands to improve readability, and use fixed precision, such as "$1,240.10". Or, maybe you want to display only the significant digits of a particular number. D3 makes this easy using a standard number format. For example, to create a function that zero-fills to four digits, say:
@@ -670,13 +709,15 @@ extern class D3{
 	static function requote(s:String):String;
 	
 	
+	// -=-=-=-=-=-=- Time Formatting -=-=-=-=-=-=-
+	
 	/**
 	time format 
 	*/
 	static var time(default, null):Time;
 	
 	
-	// -=-=-=-=-=- Localization -=-=-=-=-=-=-
+	// -=-=-=-=-=-=- Localization -=-=-=-=-=-=-
 	
 	/**
 	Returns a new locale given the specified definition. 
@@ -684,5 +725,15 @@ extern class D3{
 	static function locale(definition:LocaleDef):Locale;
 	
 	
-	// -=-=-=-=-=- x -=-=-=-=-=-=-
+	// -=-=-=-=-=-=- Behaviors -=-=-=-=-=-=-
+	
+	static var behavior(default, null):Behavior;
+	
+	// -=-=-=-=-=-=- Geo Paths -=-=-=-=-=-=-
+	/**
+	Geo Paths
+	*/
+	static var geo(default, null):Geo;
+	
+	// -=-=-=-=-=-=- d3.layout (Layouts) -=-=-=-=-=-=-
 }

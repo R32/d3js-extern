@@ -24,7 +24,7 @@ HXFILES :=	$(shell find js -type f \( -name "*.hx" \))
 #HXFILES := $(wildcard js/*.hx) $(wildcard js/*/*.hx) $(wildcard js/*/*/*.hx)
 #---------------------------------------------------------------------------------
 
-IN := d3 D3 Callb
+IN := d3 D3 Callb eventType
 INCLUDE := $(addprefix -in$(SPACE)js.,$(IN))
 
 .PHONY: all clean

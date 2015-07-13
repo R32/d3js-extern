@@ -36,7 +36,7 @@ extern class Update extends Selection {
 	update_sel.exit().remove(complete the enter-update-exit pattern)
 	```
 	
-	为数据没有相应的 DOM 元素(当 data.length > selection.length)创建占位符. 
+	zh_CN: 为数据没有相应的 DOM 元素(当 data.length > selection.length)创建占位符. 
 	*/
 	function enter():Enter<{}>;		// {__data__:Dynamic}
 	
@@ -65,7 +65,7 @@ extern class Update extends Selection {
 	
 	If you want the document traversal order to match the selection data order, you can use `sort` or `order`.
 	
-	返回一个没有匹配到数据 的 DOM 元素(当 data.length < selection.length)的 Selection
+	zh-CN: 返回一个没有匹配到数据 的 DOM 元素(当 data.length < selection.length)的 Selection
 	*/
 	function exit():Selection;
 }

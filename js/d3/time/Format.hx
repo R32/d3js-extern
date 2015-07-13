@@ -102,13 +102,17 @@ format(new Date(2011, 0, 1)); // returns a string
 	
 	If you prefer to be explicit, you can also use the date object's getTime method, but the + operator is shorter and possibly faster.
 	*/
-	@:selfCall function selfCall():Date->String;
+	@:selfCall function selfCall(date:Date):String;
 	
 	
 	/**
-	Parses the specified string, returning the corresponding date object. If the parsing fails, returns null. Unlike "natural language" date parsers (including JavaScript's built-in parse), this method is strict: if the specified string does not exactly match the associated format specifier, this method returns null. For example, if the associated format is the full ISO 8601 string "%Y-%m-%dT%H:%M:%SZ", then the string "2011-07-01T19:15:28Z" will be parsed correctly, but "2011-07-01T19:15:28", "2011-07-01 19:15:28" and "2011-07-01" will return null, despite being valid 8601 dates. (Note that the hard-coded "Z" here is different from %Z, the time zone offset.) If desired, you can use multiple formats to try multiple format specifiers sequentially. 
+	Parses the specified string, returning the corresponding date object. If the parsing fails, returns null. Unlike "natural language" date parsers (including JavaScript's built-in parse), this method is strict: if the specified string does not exactly match the associated format specifier, this method returns null. 
+	
+	For example, if the associated format is the full ISO 8601 string "%Y-%m-%dT%H:%M:%SZ", then the string "2011-07-01T19:15:28Z" will be parsed correctly, but "2011-07-01T19:15:28", "2011-07-01 19:15:28" and "2011-07-01" will return null, despite being valid 8601 dates. (Note that the hard-coded "Z" here is different from %Z, the time zone offset.) If desired, you can use multiple formats to try multiple format specifiers sequentially. 
 	
 	The `%d` and `%e` format specifiers are considered equivalent for parsing.
+	
+	zh-CN: 将 selfCall() 的返回值 解析成相应的 Date 对象,
 	*/
 	function parse(str:String):Date;
 	
@@ -133,7 +137,7 @@ format(new Date(2011, 0, 1)); // returns a string
 	
 	The multi method is available on any d3.time.format constructor. For example, d3.time.format.utc.multi returns a multi-resolution UTC time format, and locale.timeFormat.multi returns a multi-resolution time format for the specified locale.
 	
-	返回一个函数, 当给这个函数传入一个 Date 类型参数时, 将返回第一个 返回值不为 `false|null|0|""` 相对应的项,如果全都没匹配,很可能将抛出错误.
+	zh-CN: 返回一个函数, 当给这个函数传入一个 Date 类型参数时, 将返回第一个 返回值不为 `false|null|0|""` 相对应的项,如果全都没匹配,很可能将抛出错误.
 	*/
 	static function multi(formats:Array<DFilter>):Date-> String;
 	
@@ -141,7 +145,7 @@ format(new Date(2011, 0, 1)); // returns a string
 	/**
 	Constructs a new UTC time formatter using the given specifier. (Equivalent to locale.timeFormat.utc for the default U.S. English locale.) The specifier may contain the same directives as the local time format. Internally, this time formatter is implemented using the UTC methods on the Date object, such as getUTCDate and setUTCDate in place of getDate and setDate. 
 	
-	和 Format 一样, 但使用 utc 的方法如 getUTCDate 获取时间值.
+	zh-CN: 和 Format 一样, 但使用 utc 的方法如 getUTCDate 获取时间值.
 	*/
 	static function utc(specifier:String):Format;
 	

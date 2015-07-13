@@ -113,23 +113,27 @@ https://github.com/mbostock/d3/wiki/API-Reference
 
  - [] D3 global
  
- - [] Selections
+ - [x] Selections
  
  - [] Transitions
  
- - [] Working with Arrays
+ - [x] Working with Arrays
+ 
+	> `js.d3.arryas.*`
  
  - [] Math
  
  - [] Loading External Resources
  
- - [] String Formatting
+ - [x] String Formatting
  
  - [] CSV Formatting (d3.csv)
  
- - [] Localization
+ - [x] Localization	
  
- - [] Colors
+	> `js.d3.Locale` and `typedef LocaleDef`
+ 
+ - [x] Colors 
  
  - [] Namespaces
  
@@ -151,7 +155,7 @@ https://github.com/mbostock/d3/wiki/API-Reference
    
  - [] d3.time (Time)
  
-  - [] Time Formatting
+  - [x] Time Formatting `js.d3.time.Format` 
   
   - [] Time Scales
   
