@@ -19,7 +19,7 @@ SPACE:= $(EMPTY) $(EMPTY)
 #---------------------------------------------------------------------------------
 
 TITLE	:=	"D3js API"
-THEME	:=	default_zhcn
+THEME	:=	default
 HXFILES :=	$(shell find js -type f \( -name "*.hx" \))
 #HXFILES := $(wildcard js/*.hx) $(wildcard js/*/*.hx) $(wildcard js/*/*/*.hx)
 #---------------------------------------------------------------------------------
