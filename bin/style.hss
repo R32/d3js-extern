@@ -1,0 +1,77 @@
+var yahei = "微软雅黑";
+
+body{
+	font-family: $yahei;
+	border: 1px solid #ddd;
+}
+
+.cf:before,
+.cf:after{
+	content: CSS('" "');/* 1 */
+	display: table; /* 2 */	
+}
+
+.cf:after{
+	clear: both;
+}
+.cf {
+@include("{
+	*zoom: 1;
+}")
+}
+
+
+
+div.header{
+
+	ul{
+		margin:0;
+		padding:0;
+		
+		li{
+			float: left;
+			list-style-type:none;
+			margin: 2px 6px;
+			cursor:pointer;
+		}
+		
+		li:first-child{
+			margin: 2px 6px 2px 0;
+		}
+	}
+	
+	br.clearFloat{
+		clear:both;
+		height: 1px;
+	}
+}
+
+
+#content{
+
+}
+
+#piece{
+	display:block;
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	top:0;
+	right:0;
+	background-color:#c9510c;
+	color:#ffffff;
+	font-size:2em;
+	line-height:92px;
+	text-align:center;
+}
+
+#drag{
+	display:inline-block;
+	width: 100px;
+	height: 100px;
+	background-color:#6cc644;
+	color:#ffffff;
+	font-size:2em;
+	line-height:92px;
+	text-align:center;
+}
