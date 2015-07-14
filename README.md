@@ -111,23 +111,23 @@ utc.parse("May");
 
 https://github.com/mbostock/d3/wiki/API-Reference
 
- - [] D3 global
+ - [ ] D3 global
  
  - [x] Selections
  
- - [] Transitions
+ - [ ] Transitions
  
  - [x] Working with Arrays
  
 	> `js.d3.arryas.*`
  
- - [] Math
+ - [ ] Math
  
- - [] Loading External Resources
+ - [ ] Loading External Resources
  
  - [x] String Formatting
  
- - [] CSV Formatting (d3.csv)
+ - [ ] CSV Formatting (d3.csv)
  
  - [x] Localization	
  
@@ -135,77 +135,77 @@ https://github.com/mbostock/d3/wiki/API-Reference
  
  - [x] Colors 
  
- - [] Namespaces
+ - [ ] Namespaces
  
- - [] Internals
+ - [ ] Internals
  
- - [] d3.scale (Scales)
+ - [ ] d3.scale (Scales)
  
-  - [] Quantitative
+  - [ ] Quantitative
   
-  - [] Ordinal
+  - [ ] Ordinal
    
- - [] d3.svg (SVG)
+ - [ ] d3.svg (SVG)
  
-   - [] Shapes
+   - [ ] Shapes
    
-   - [] Axes
+   - [ ] Axes
    
-   - [] Controls
+   - [ ] Controls
    
- - [] d3.time (Time)
+ - [ ] d3.time (Time)
  
   - [x] Time Formatting `js.d3.time.Format` 
   
-  - [] Time Scales
+  - [ ] Time Scales
   
-  - [] Time Intervals
+  - [ ] Time Intervals
   
- - [] d3.layout (Layouts)
+ - [ ] d3.layout (Layouts)
  
-  - [] Bundle
+  - [ ] Bundle
  
-  - [] Chord
+  - [ ] Chord
  
-  - [] Cluster
+  - [ ] Cluster
   
-  - [] Hierarchy
+  - [ ] Hierarchy
   
-  - [] Histogram
+  - [ ] Histogram
   
-  - [] Pack
+  - [ ] Pack
   
-  - [] Partition
+  - [ ] Partition
   
-  - [] Pie
+  - [ ] Pie
   
-  - [] Stack
+  - [ ] Stack
   
-  - [] Tree
+  - [ ] Tree
   
-  - [] Treemap
+  - [ ] Treemap
 
  
- - [] d3.geo (Geography)
+ - [ ] d3.geo (Geography)
  
-  - [] Paths
+  - [ ] Paths
  
-  - [] Projections
+  - [ ] Projections
  
-  - [] Streams
+  - [ ] Streams
  
- - [] d3.geom (Geometry)
+ - [ ] d3.geom (Geometry)
  
-  - [] Voronoi
+  - [ ] Voronoi
  
-  - [] Quadtree
+  - [ ] Quadtree
  
-  - [] Polygon
+  - [ ] Polygon
  
-  - [] Hull
+  - [ ] Hull
   
- - [] d3.behavior (Behaviors)
+ - [ ] d3.behavior (Behaviors)
  
-  - [] Drag
+  - [x] Drag
  
-  - [] Zoom
+  - [ ] Zoom
