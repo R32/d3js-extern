@@ -19,58 +19,6 @@ Extern type definitions for `d3 version 3.5.6` and `Haxe 3.2+`.
  
 ### Example
 
-```haxe
-import js.D3;
-
-class Main {
-    static function main() {
-      	D3.interpolators.push(function(a, b){
-			var re = new js.RegExp("^\\$([0-9,.]+)$");
-			var f = D3.format(",.02f");
-			var ma = re.exec(a);
-			var mb = re.exec(b); 
-			if (ma != null && mb != null) {
-				var fa = Std.parseFloat(ma[1]);
-				var fb = Std.parseFloat(mb[1]) - fa;
-				return function(t){
-					return "$" + f(fa + fb * t);
-				}
-			}
-			return null;
-		});
-		
-		trace(D3.interpolate("$20", "$10")(1 / 3));		// output: $16.67
-    }
-}
-```
-
-Generated JavaScript:
-	
-
-```js
-(function () { "use strict";
-var test_Test = function() { };
-test_Test.main = function() {
-	d3.interpolators.push(function(a,b) {
-		var re = new RegExp("^\\$([0-9,.]+)$");
-		var f = d3.format(",.02f");
-		var ma = re.exec(a);
-		var mb = re.exec(b);
-		if(ma != null && mb != null) {
-			var fa = parseFloat(ma[1]);
-			var fb = parseFloat(mb[1]) - fa;
-			return function(t) {
-				return "$" + f(fa + fb * t);
-			};
-		}
-		return null;
-	});
-	console.log((d3.interpolate("$20","$10"))(0.33333333333333331));
-};
-test_Test.main();
-})();
-```
-
 #### difference
 
 native javascript:
