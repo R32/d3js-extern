@@ -67,20 +67,11 @@ extern class Drag{
 }
 
 /**
-Drag events (but not dragstart and dragend events)
+drag events (but not dragstart and dragend events)
 */
-typedef DragingEvent = { > DragAEvent,
+typedef DragingEvent = { > WarpEvent<Drag, js.html.Event>,
 	dx:Int,
 	dy:Int,
 	x:Int,
 	y:Int
-}
-
-/**
-dragstart and dragend events 
-*/
-typedef DragAEvent = {
-	type:String,
-	sourceEvent:js.html.Event,
-	target:Drag
 }
