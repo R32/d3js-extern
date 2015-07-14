@@ -83,8 +83,8 @@ https://github.com/mbostock/d3/wiki/Selections
 	*/
 	@:overload(function(name:String):Dynamic { } )
 	@:overload(function(obj: { } ):Selection { } )
-	@:overload(function(name:String, cb:Callb<Dynamic->Int->Int->Primitive>):Selection { } )
-	function property(name:String, value:Primitive):Selection;
+	@:overload(function(name:String, cb:Callb<Dynamic->Int->Int->Dynamic>):Selection { } )
+	function property(name:String, value:Dynamic):Selection;
 
 	
 	/**
