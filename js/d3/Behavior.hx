@@ -37,6 +37,19 @@ extern class Behavior {
 	
 	zh-CN: 移除 drag 时注意不要忘了小数点, 因为这个 drag 并不是源生的 drag 事件.
 	*/
-	function drag():Drag;	
+	function drag():Drag;
+	
+	/**
+	Constructs a new zoom behavior. Once constructed, you can apply the behavior to selected elements using selection.call:
+	
+	```js
+	var zoom = d3.behavior.zoom();
+	selection.call(zoom);
+	
+	//All registered listeners use the “zoom” namespace, so to subsequently remove the behavior:
+	
+	selection.on(".zoom", null);
+	```
+	*/
 	function zoom():Zoom;	
 }

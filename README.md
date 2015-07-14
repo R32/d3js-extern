@@ -117,9 +117,7 @@ https://github.com/mbostock/d3/wiki/API-Reference
  
  - [ ] Transitions
  
- - [x] Working with Arrays
- 
-	> `js.d3.arryas.*`
+ - [x] Working with Arrays - `js.d3.arryas.*`
  
  - [ ] Math
  
@@ -129,9 +127,7 @@ https://github.com/mbostock/d3/wiki/API-Reference
  
  - [ ] CSV Formatting (d3.csv)
  
- - [x] Localization	
- 
-	> `js.d3.Locale` and `typedef LocaleDef`
+ - [x] Localization	- `js.d3.Locale, typedef LocaleDef`
  
  - [x] Colors 
  
@@ -153,9 +149,9 @@ https://github.com/mbostock/d3/wiki/API-Reference
    
    - [ ] Controls
    
- - [ ] d3.time (Time)
+ - [ ] d3.time (Time) - `js.d3.Time, js.d3.time.*`
  
-  - [x] Time Formatting `js.d3.time.Format` 
+  - [x] Time Formatting
   
   - [ ] Time Scales
   
@@ -185,7 +181,6 @@ https://github.com/mbostock/d3/wiki/API-Reference
   
   - [ ] Treemap
 
- 
  - [ ] d3.geo (Geography)
  
   - [ ] Paths
@@ -204,8 +199,9 @@ https://github.com/mbostock/d3/wiki/API-Reference
  
   - [ ] Hull
   
- - [ ] d3.behavior (Behaviors)
- 
+ - [x] d3.behavior (Behaviors) - `js.d3.Behavior, js.d3.behavior.*`
+	
   - [x] Drag
  
-  - [ ] Zoom
+  - [x] Zoom
+
