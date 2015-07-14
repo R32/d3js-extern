@@ -4,12 +4,12 @@ package js;
 
 
 
+
 import js.html.Node;
 import haxe.Constraints.Function;
 
 import js.d3.Selection;
 import js.d3.Transition;
-import js.d3.Transform;
 import js.d3.arrays.Map;
 import js.d3.arrays.Set;
 import js.d3.arrays.Nest;
@@ -18,6 +18,8 @@ import js.d3.Color;
 import js.d3.Locale;
 import js.d3.Time;
 import js.d3.Behavior;
+import js.d3.math.Random;
+import js.d3.math.Transform;
 import js.d3.Geo;
 
 typedef Number = Null<haxe.extern.EitherType<Int,Float>>;
@@ -96,7 +98,19 @@ extern class D3{
 	
 	// TODO: -=-=-=-=-=-=-=-=- Internals -=-=-=-=-=-=-=-=-
 	
-	// TODO: -=-=-=-=-=-=-=-=- Math -=-=-=-=-=-=-=-=-
+	// -=-=-=-=-=-=-=-=- Math -=-=-=-=-=-=-=-=-
+	
+	/**
+	Pseudorandom Number Generation 
+	*/
+	static var random(default, null):Random;
+	
+	/**
+	Parses the given 2D affine transform string, as defined by SVG's transform attribute. The transform is then decomposed to an object with fields for translate, rotate, x-skew and scale. This behavior is standardized by CSS: see matrix decomposition for animation. 
+	
+	zh-CN: 
+	*/
+	static function transform(?css:String):Transform;
 	
 	// -=-=-=-=-=-=-=-=- Working with Arrays -=-=-=-=-=-=-=-=-
 	

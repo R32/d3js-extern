@@ -67,7 +67,7 @@ https://github.com/mbostock/d3/wiki/API-Reference
  
  - [x] Working with Arrays - `js.d3.arryas.*`
  
- - [ ] Math
+ - [x] Math - `js.d3.math.*`
  
  - [ ] Loading External Resources
  
