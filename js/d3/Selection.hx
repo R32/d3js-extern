@@ -91,8 +91,8 @@ https://github.com/mbostock/d3/wiki/Selections
 	based on the `textContent` property.  returns the inner text content for the first non-null element in the selection
 	*/
 	@:overload(function():String { } )
-	@:overload(function(func:Callb<Dynamic->Int->Int->String>):Selection { } )
-	function text(text:String):Selection;
+	@:overload(function(func:Callb<Dynamic->Int->Int->Primitive>):Selection { } )
+	function text(text:Primitive):Selection;
 	
 	
 	/**
@@ -101,8 +101,8 @@ https://github.com/mbostock/d3/wiki/Selections
 	based on the `innerHTML` property, setting the inner HTML content will replace any existing child elements. Also, you may prefer to use the `append` or `inser`t operators to create HTML content in a data-driven way; this operator is intended for when you want a little bit of HTML, say for rich formatting. A null value will clear the content
 	*/
 	@:overload(function():Null<String> { } )
-	@:overload(function(func:Callb<Dynamic->Int->Int->String>):Selection { } )
-	function html(html:Null<String>):Selection;
+	@:overload(function(func:Callb<Dynamic->Int->Int->Primitive>):Selection { } )
+	function html(html:Primitive):Selection;
 	
 	
 	
@@ -212,7 +212,7 @@ https://github.com/mbostock/d3/wiki/Selections
 	
 	*/
 	@:overload(function(query:String):Selection { } )
-	function filter(cb:Callb<Dynamic->Int->Int->Bool>):Selection;
+	function filter(cb:Callb<Dynamic->Int->Int->Primitive>):Selection;
 	
 	/**
 	Sorts the elements in the current selection according to the comparator function, and then re-inserts the document elements to match. Returns the selection. 

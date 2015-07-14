@@ -20,6 +20,7 @@ import js.d3.Time;
 import js.d3.Behavior;
 import js.d3.math.Random;
 import js.d3.math.Transform;
+import js.d3.Primitive;
 import js.d3.Geo;
 
 typedef Number = Null<haxe.extern.EitherType<Int,Float>>;
@@ -372,7 +373,6 @@ extern class D3{
 	
 	static function ease(type:EaseType, rest:haxe.extern.Rest<Float>):EaseFunction;
 	
-
 	
 	/**
 	Start a custom animation timer, invoking the specified function repeatedly until it returns true. There is no way to cancel the timer after it starts, so make sure your timer function returns true when done!
@@ -392,9 +392,9 @@ extern class D3{
 	
 	Note that if d3.timer is called within the callback of another timer, the new timer will be invoked immediately at the end of the current frame (if active as determined by the specified delay and time), rather than waiting until the next frame.
 	
-	zh_CN: 注意: 如果一个新 d3.timer 在 另一个 timer 回调中被调用, 那么这个新 timer 将在结束当前 timer 才开始调用.
+	zh_CN: 直到回调函数返回 true 值. 注意: 如果一个新 d3.timer 在 另一个 timer 回调中被调用, 那么这个新 timer 将在结束当前 timer 才开始调用.
 	*/
-	static function timer(func:Callb<Float->Dynamic>, delay:Float = 0, ?time:Float):Void;
+	static function timer(func:Callb<Float->Primitive>, delay:Float = 0, ?time:Float):Void;
 	
 	/**
 	equivalent to `d3.timer.flush`
