@@ -12,19 +12,17 @@ import js.html.XMLHttpRequest;
 
 import js.d3.Selection;
 import js.d3.Transition;
-import js.d3.arrays.Map;
-import js.d3.arrays.Set;
-import js.d3.arrays.Nest;
 import js.d3.FlxEase;
 import js.d3.Color;
 import js.d3.Locale;
 import js.d3.Time;
 import js.d3.Behavior;
-import js.d3.math.Random;
-import js.d3.math.Transform;
 import js.d3.Primitive;
 import js.d3.XHR;
 import js.d3.Timer;
+import js.d3.Namespace;
+import js.d3.arrays.*;
+import js.d3.math.*;
 import js.d3.format.*;		// csv, tsv, xhrr
 import js.d3.Geo;
 
@@ -778,32 +776,17 @@ extern class D3{
 	*/
 	static function html(url:String, ?callback:XMLHttpRequest->js.html.DocumentFragment->Void):XHR;
 	
-	/**
-	Issues an HTTP GET request for the comma-separated values (CSV) file at the specified url. The file contents are assumed to be [RFC4180-compliant](http://tools.ietf.org/html/rfc4180). The mime type of the request will be "text/csv". The request is processed asynchronously, such that this method returns immediately after opening the request. When the CSV data is available, the specified callback will be invoked with the parsed rows as the argument. If an error occurs, the callback function will instead be invoked with null. An optional accessor function may be specified, which is then passed to d3.csv.parse; the accessor may also be specified by using the return request object’s row function. For example: 
-	
-	```js
-	d3.csv("example.csv", function(d) {
-	  return {
-		year: new Date(+d.Year, 0, 1), // convert "Year" column to Date
-		make: d.Make,
-		model: d.Model,
-		length: +d.Length // convert "Length" column to number
-	  };
-	}, function(error, rows) {
-	  console.log(rows);
-	});
-	```
-	
-	See the [unemployment choropleth](http://bl.ocks.org/mbostock/4060606) for an example.
-	*/
-	//@:overload(function(url:String, ?callback:XMLHttpRequest->Array<{}>->Void):XHRR { } )	
+
+	// See js.d3.format.* 
 	//static function csv(url:String, accessor:Callb<{}->Int->Dynamic>, ?callback:XMLHttpRequest->Array<Dynamic>->Void):XHRR;
-		
-	/**
-	see csv 
-	*/
-	//@:overload(function(url:String, ?callback:XMLHttpRequest->Array<{}>->Void):XHRR { } )	
 	//static function tsv(url:String, accessor:Callb<{}->Int->Dynamic>, ?callback:XMLHttpRequest->Array<Dynamic>->Void):XHRR;
+	
+	
+	// -=-=-=-=-=-=- Namespaces -=-=-=-=-=-=-
+	
+	
+	static var ns(default,null):Namespace;
+	
 	
 	// -=-=-=-=-=-=- d3.layout (Layouts) -=-=-=-=-=-=-
 }

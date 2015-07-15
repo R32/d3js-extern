@@ -99,7 +99,7 @@ https://github.com/mbostock/d3/wiki/API-Reference
  
  - [x] Colors 
  
- - [ ] Namespaces
+ - [x] Namespaces
  
  - [ ] Internals
  
