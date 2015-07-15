@@ -35,7 +35,7 @@ div.header br.clearFloat {
 	height : 100px;
 	position : absolute;
 	top : 0;
-	right : 0;
+	left : 0;
 	background-color : #c9510c;
 	color : #ffffff;
 	font-size : 2em;

@@ -3,6 +3,7 @@ package test;
 import js.Browser;
 import js.Callb;
 import js.d3.Color;
+import js.d3.Dispatch;
 import js.d3.Selection;
 import js.d3.time.Format;
 import js.JSArray;
@@ -11,6 +12,11 @@ import js.Lib;
 import js.d3.FlxEase;
 import js.eventType.All;
 import js.d3.behavior.Zoom;
+import js.d3.Transition;
+import js.d3.behavior.Drag;
+import js.d3.behavior.Zoom;
+import js.d3.XHR;
+import js.d3.format.*;
 
 class Test{
 	
@@ -34,7 +40,9 @@ class Test{
 		trace("\"d3.select('div') instanceof d3.selection\": " + untyped __instanceof__(c, D3.selection));
 
 		
-
+		trace('normal: ${D3.random.normal()()}, bates: ${D3.random.bates(10)()}, ' +
+		'logNormal: ${D3.random.logNormal()()}, irwinHall: ${D3.random.irwinHall(10)()}'	
+		);
 		
 
 		testFormat();
@@ -42,6 +50,33 @@ class Test{
 		testColor();
 		testDrag(); 
 		testZoom();
+		testXhr();
+		
+
+		trace(D3.ns.qualify("svg:text").space);
+		D3.timer.selfCall(function() { return true; } );
+		D3.timer.flush();
+		
+		var dp:Dispatch = D3.dispatch("hi", "bye");
+		dp.hi().hi();
+	}
+	
+	static function testXhr(){
+		var x = D3.xhr("style.css");
+		x.responseType(XHRResponseType.TEXT);
+		x.response(function(resp) { return "HEAD Request"; } );
+		x.on(XHREventType.LOAD, function(str:String) { trace('testXhr: ${str}'); } );
+		x.send(XHRMethodType.HEAD);
+		
+		var y = D3.csv.selfCall("csv.txt",function(d){
+			return d.Make;
+		},function(err,data){
+			trace( 'testCSv: ${(data.join(","))}');
+		});
+			
+		D3.dsv("|", "text/plain").selfCall("csv.txt");
+		
+		D3.tsv.selfCall("csv.txt");
 	}
 	
 	static function testZoom() {
@@ -49,8 +84,8 @@ class Test{
 		var zoom = D3.behavior.zoom();
 		zoom.center([50, 50])
 			.scaleExtent([1, 10])
-			.on(ZoomEventType.ZOOM, function(d,i,j) {
-				untyped console.log(D3.event.translate, D3.event.scale);
+			.on(ZoomEventType.ZOOM, function(d, i, j) {
+				trace('testZoom: ,translate: ${untyped D3.event.translate}, scale: ${untyped D3.event.scale}');
 			} );
 		c.call(zoom.selfCall);
 		
@@ -83,9 +118,9 @@ class Test{
 		
 		c.call(drag.selfCall);
 		
-		drag.origin(function(d, i, j) { untyped console.log(D3.event); return {x:0,y:0}; } ).on(SDrag.DRAG, function() {
+		drag.origin(function(d, i, j) { untyped console.log(D3.event); return {x:0,y:0}; } ).on(DragEventType.DRAG, function() {
 			var e:js.d3.behavior.Drag.DragingEvent = D3.event;
-			trace('x: ${e.x},y: ${e.y}, dx: ${e.dx},dy: ${e.dy}');
+			trace('testDrag: x: ${e.x},y: ${e.y}, dx: ${e.dx},dy: ${e.dy}');
 		});
 	}
 	
@@ -102,9 +137,26 @@ class Test{
 	static function testTransition(c:Selection){
 		var width = Browser.document.documentElement.clientWidth;
 		
-		var tans = D3.select("#piece").transition();
+		D3.select("#piece font").transition().delay(200).duration(1000).attrTween("color", function(d, i, s) {
+			return D3.interpolateRgb(s, "#000000");
+		}).style( { "background-color":"#ffffff", "font-size":"48px" } );
 		
-		//tans.delay(1000).duration(1000).ease(EaseType.BounceOutIn).style("left", (width - 100)+"px");
+		D3.select("p.second")
+			.datum(function() {
+				return Lib.nativeThis.textContent;
+			})
+			.transition("hi")
+			.delay(300)
+			.duration(1000)
+			.tween("text",function(){
+				var it = D3.interpolateRound(0, 100);
+				return function(t){
+					Lib.nativeThis.textContent = it(t);
+				}
+			}).transition().delay(2000).text(function(d) { return d; } ).style("color", "#a71d5d");
+			
+		
+		D3.select("#piece").transition().delay(200).duration(1000).ease(EaseType.LinearIn).style("left", (width - 100)+"px");
 		
 		trace('"d3.selection().node() == d3.transition().node()\": ' + untyped (D3.selection().node() == D3.transition().node()));
 		
