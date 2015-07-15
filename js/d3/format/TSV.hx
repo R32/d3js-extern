@@ -6,6 +6,6 @@ Tab-separated values are equivalent to comma-separated values, except the tab ch
 
 API see CSV
 */
-@:native("d3.tsv") extern class TSV extends DSV {
+extern class TSV extends DSV {
 	
 }

@@ -8,7 +8,7 @@ A selection is an array of elements pulled from the current document. D3 uses CS
 
 https://github.com/mbostock/d3/wiki/Selections
 */
-@:native("d3.selection") extern class Selection extends Enter<Group> {
+extern class Selection extends Enter<Group> {
 	
 	/**
 	The selector may also be specified as a function that returns an array of elements (or a NodeList), or the empty array if there are no matching elements.

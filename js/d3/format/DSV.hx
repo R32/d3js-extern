@@ -7,7 +7,7 @@ import haxe.extern.EitherType;
 /**
 Arbitrary Delimiters 
 */
-@:native("d3.dsv") extern class DSV {
+extern class DSV {
 	
 	/**
 	Issues an HTTP GET request for the comma-separated values (CSV) file at the specified url. The file contents are assumed to be [RFC4180-compliant](http://tools.ietf.org/html/rfc4180). The mime type of the request will be "text/csv". The request is processed asynchronously, such that this method returns immediately after opening the request. When the CSV data is available, the specified callback will be invoked with the parsed rows as the argument. If an error occurs, the callback function will instead be invoked with null. An optional accessor function may be specified, which is then passed to d3.csv.parse; the accessor may also be specified by using the return request object’s row function. For example: 
