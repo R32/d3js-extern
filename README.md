@@ -21,38 +21,43 @@ Extern type definitions for `d3 version 3.5.6` and `Haxe 3.2+`.
 
 #### difference
 
-native javascript:
+Native javascript:
 
 ```js
 var date = new Date();
 var local = d3.time.format("%B");
-console.log(local(date));				// returns string such as "May" 
+local(date);							// <--- 1.
 
 // time.format static method
-var utc = d3.time.format.utc("%B");
+var utc = d3.time.format.utc("%B");		// <--- 2.
 utc.parse("May");
+
+d3.timer.flush();						// <--- 3.
 ```
 
-haxe:
+haxe code:
 
 ```haxe
 var date = Date.now();
 var local = js.D3.time.format("%B");	// Constructs a new time formatter
-trace(local.selfCall(date)); 			// call self
+local.selfCall(date); 			// call self
 
 // time.format static method 
 var utc = js.d3.time.Format.utc("%B");	//or utc = Format.utc("%b") if import js.d3.time.Format
-utc.parse("May");						// Tue May 01 1900 08:00:00 GMT+0800
+utc.parse("May");
+
+D3.timerFlush();
 ```
 
-Haxe Generated JavaScript:
+Generated JavaScript:
 
 ```js
 var date = new Date();
 var local = d3.time.format("%B");
-console.log(local(date));
+local(date);
 var utc = d3.time.format.utc("%B");
 utc.parse("May");
+d3.timer.flush();
 ```
 
 ### Status
@@ -63,7 +68,15 @@ https://github.com/mbostock/d3/wiki/API-Reference
  
  - [x] Selections
  
- - [ ] Transitions
+ - [x] Transitions
+ 
+  - [x] Transition
+  
+   - [x] Ease - `js.d3.FlxEase`
+  
+  - [x] Timers - `d3.timer, d3.timerFlush`
+  
+  - [x] Interpolation - `d3.interpolateXXXXX`
  
  - [x] Working with Arrays - `js.d3.arryas.*`
  
