@@ -29,6 +29,9 @@ var local = d3.time.format("%B");
 local(date);									// <--- 1.
 
 d3.timer(function() { return true; });			// <--- 1.
+
+d3.dsv("|","text/plain")("csv.txt");			// <--- 1.
+
 // time.format static method
 var utc = d3.time.format.utc("%B");				// <--- 2.
 utc.parse("May");
@@ -43,8 +46,10 @@ local.selfCall(date); 							// 1. selfCall
 
 D3.timer.selfCall(function(d,f){return true;});	// 1. selfCall
 
+D3.dsv("|", "text/plain").selfCall("csv.txt");	// 1. selfCall
+
 // time.format static method 
-var utc = js.d3.time.Format.utc("%B");			// 2. pack.path.Class.staticMethod
+var utc = js.d3.time.Format.utc("%B");			// 2. pack.to.Class.staticMethod
 utc.parse("May");
 ```
 
@@ -57,13 +62,10 @@ local(date);
 d3.timer(function() {
 	return true;
 });
+d3.dsv("|","text/plain")("csv.txt");
 var utc = d3.time.format.utc("%B");
 utc.parse("May");
 ```
-
-In haXe, because a function cannot have fields, so not like Javascript. 
-
-
 
 ### Status
 
