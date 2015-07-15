@@ -21,6 +21,7 @@ import js.d3.Primitive;
 import js.d3.XHR;
 import js.d3.Timer;
 import js.d3.Namespace;
+import js.d3.Dispatch;
 import js.d3.arrays.*;
 import js.d3.math.*;
 import js.d3.format.*;		// csv, tsv, xhrr
@@ -100,7 +101,60 @@ extern class D3{
 	*/
 	static var selection(default, null):Void->Selection;				//	haxe.Constraints.Function;
 	
-	// TODO: -=-=-=-=-=-=-=-=- Internals -=-=-=-=-=-=-=-=-
+	// -=-=-=-=-=-=-=- Internals -=-=-=-=-=-=-=-
+	
+	/**
+	If the specified value is a function, returns the specified value. Otherwise, returns a function that returns the specified value. This method is used internally as a lazy way of upcasting constant values to functions, in cases where a property may be specified either as a function or a constant. For example, many D3 layouts allow properties to be specified this way, and it simplifies the implementation if we automatically convert constant values to functions. 
+	
+	```js
+	function d3_functor(v) {
+		return typeof v === "function" ? v : function() {
+			return v;
+		};
+	}
+	```
+	*/
+	static function functor(value:Dynamic):Function;
+	
+	/**
+	Copies the methods with the specified names from source to target, and returns target. Calling one of the named methods on the target object invokes the same-named method on the source object, passing any arguments passed to the target method, and using the source object as the this context. If the source method returns the source object, the target method returns the target object (“setter” method); otherwise, the target method returns the return value of the source method (“getter” mode). The rebind operator allows inherited methods (mix-ins) to be rebound to a subclass on a different object. 
+	
+	```js
+	// sourcecode
+	d3.rebind = function(target, source) {
+		var i = 1, n = arguments.length, method;
+		while (++i < n) target[method = arguments[i]] = d3_rebind(target, source, source[method]);
+		return target;
+	};
+	function d3_rebind(target, source, method) {
+		return function() {
+		var value = method.apply(source, arguments);
+		return value === source ? target : value;
+		};
+	}	
+	```
+	
+	zh-CN: 复制src的方法到dst上，调用这个方法是以 src 作为 context,返回值如果为 src 表明为链式调用则返回 dst，否则返回计算值. 在 haxe 似乎不需要这个方法.
+	*/
+	static function rebind(target:Dynamic, source:Dynamic, args:haxe.extern.Rest<String>):Dynamic;
+	
+	/**
+	Creates a new dispatcher object for the specified types. Each argument is a string representing the name of the event type, such as "zoom" or "change". The returned object is an associative array; each type name is associated with a dispatch object. For example, if you wanted to create an event dispatcher for "start" and "end" events, you can say:
+
+	`var dispatch = d3.dispatch("start", "end");`
+
+	Then, you can access the dispatchers for the different event types as dispatch.start and dispatch.end. For example, you might add an event listener:
+
+	`dispatch.on("start", listener);`
+	
+	And then later dispatch an event to all registered listeners:
+
+	`dispatch.start();`
+
+	For details on how to pass arguments to listeners, see dispatch. 
+	*/
+	static function dispatch(types:haxe.extern.Rest<String>):Dispatch;
+	
 	
 	// -=-=-=-=-=-=-=-=- Math -=-=-=-=-=-=-=-=-
 	

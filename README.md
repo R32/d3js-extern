@@ -101,7 +101,7 @@ https://github.com/mbostock/d3/wiki/API-Reference
  
  - [x] Namespaces
  
- - [ ] Internals
+ - [x] Internals - `js.d3.Dispatch` For haxe is, this stuff seems not very useful
  
  - [ ] d3.scale (Scales)
  
