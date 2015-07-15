@@ -26,27 +26,26 @@ Native javascript:
 ```js
 var date = new Date();
 var local = d3.time.format("%B");
-local(date);							// <--- 1.
+local(date);									// <--- 1.
 
+d3.timer(function() { return true; });			// <--- 1.
 // time.format static method
-var utc = d3.time.format.utc("%B");		// <--- 2.
+var utc = d3.time.format.utc("%B");				// <--- 2.
 utc.parse("May");
-
-d3.timer.flush();						// <--- 3.
 ```
 
 haxe code:
 
 ```haxe
 var date = Date.now();
-var local = js.D3.time.format("%B");	// Constructs a new time formatter
-local.selfCall(date); 			// call self
+var local = js.D3.time.format("%B");			// Constructs a new time formatter
+local.selfCall(date); 							// 1. selfCall
+
+D3.timer.selfCall(function(d,f){return true;});	// 1. selfCall
 
 // time.format static method 
-var utc = js.d3.time.Format.utc("%B");	//or utc = Format.utc("%b") if import js.d3.time.Format
+var utc = js.d3.time.Format.utc("%B");			// 2. pack.path.Class.staticMethod
 utc.parse("May");
-
-D3.timerFlush();
 ```
 
 Generated JavaScript:
@@ -55,10 +54,16 @@ Generated JavaScript:
 var date = new Date();
 var local = d3.time.format("%B");
 local(date);
+d3.timer(function() {
+	return true;
+});
 var utc = d3.time.format.utc("%B");
 utc.parse("May");
-d3.timer.flush();
 ```
+
+In haXe, because a function cannot have fields, so not like Javascript. 
+
+
 
 ### Status
 
