@@ -76,17 +76,17 @@ https://github.com/mbostock/d3/wiki/API-Reference
   
   - [x] Timers - `d3.timer, d3.timerFlush`
   
-  - [x] Interpolation - `d3.interpolateXXXXX`
+  - [x] Interpolation
  
  - [x] Working with Arrays - `js.d3.arryas.*`
  
  - [x] Math - `js.d3.math.*`
  
- - [ ] Loading External Resources
+ - [x] Loading External Resources
  
  - [x] String Formatting
  
- - [ ] CSV Formatting (d3.csv)
+ - [x] CSV Formatting - `d3.format.*`
  
  - [x] Localization	- `js.d3.Locale, typedef LocaleDef`
  

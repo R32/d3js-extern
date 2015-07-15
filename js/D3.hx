@@ -7,6 +7,7 @@ package js;
 
 import js.html.Node;
 import haxe.Constraints.Function;
+import js.html.XMLHttpRequest;
 
 import js.d3.Selection;
 import js.d3.Transition;
@@ -21,6 +22,8 @@ import js.d3.Behavior;
 import js.d3.math.Random;
 import js.d3.math.Transform;
 import js.d3.Primitive;
+import js.d3.XHR;
+import js.d3.format.*;		// csv, tsv, xhrr
 import js.d3.Geo;
 
 typedef Number = Null<haxe.extern.EitherType<Int,Float>>;
@@ -362,7 +365,16 @@ extern class D3{
 	 
 	 - 如果第一个参数为 Selection,但是如果不符合要求(要求见英文.TODO:x), 将返回这个 Selection,
 	 
-	因此正常情况下应该通过 selection.transition 创建
+	 - 用于 transition.each 的遍历内部 将创建 inherit 类型的 transition.
+	 
+	 ```js
+	 d3.select("p")
+		.transition("hi")
+		.delay(500)
+		.each(function(){ 
+			console.log( d3.transition(d3.select(this),"hi").delay() )	// 返回前边继承的 500
+		})
+	 ```
 	*/
 	@:overload(function(?selection:Selection, ?name:String):Transition{})
 	static function transition(?selection:Selection, ?name:String):Selection;
@@ -748,6 +760,78 @@ extern class D3{
 	Geo Paths
 	*/
 	static var geo(default, null):Geo;
+	
+	// -=-=-=-=-=- CSV Formatting (d3.csv) -=-=-=-=-=-
+	
+	static var csv(default,null):CSV;
+	
+	static var tsv(default, null):TSV;
+	
+	/**
+	Constructs a new parser for the given delimiter and mime type. For example, to parse values separated by "|", the vertical bar character, use:
+
+	```js
+	var dsv = d3.dsv("|", "text/plain"); 
+	```
+	*/
+	static function dsv(delimiter:String, mimeType:String):DSV;
+	
+	// -=-=-=-=-=- Loading External Resources -=-=-=-=-=-
+	/**
+	Creates an asynchronous request for specified url. An optional mime type may be specified as the second argument, such as "text/plain". If a callback is specified, the request is immediately issued with the GET method and the callback is invoked asynchronously when the resource is loaded or the request fails; the callback is invoked with two arguments: the error, if any, and the XMLHttpRequest object representing the response. The response is undefined if an error occurs. If the response has an unsuccessful status code, the error is the XMLHttpRequest object. If no callback is specified, the returned request can be issued using xhr.get, xhr.post or similar, and handled using xhr.on. 
+	*/
+	@:overload(function(url:String, ?callback:XMLHttpRequest->XMLHttpRequest->Void):XHR{})
+	static function xhr(url:String, mimeType:String, ?callback:XMLHttpRequest->XMLHttpRequest->Void):XHR;
+	
+	/**
+	Creates a request for the text file at the specified url. An optional mime type may be specified as the second argument, such as "text/plain". If a callback is specified, the request is immediately issued with the GET method, and the callback will be invoked asynchronously when the file is loaded or the request fails; the callback is invoked with two arguments: the error, if any, and the response text. The response text is undefined if an error occurs. If no callback is specified, the returned request can be issued using xhr.get or similar, and handled using xhr.on. 
+	*/
+	@:overload(function(url:String, ?callback:XMLHttpRequest->String->Void):XHR{})
+	static function text(url:String, mimeType:String, ?callback:XMLHttpRequest->String->Void):XHR;
+	
+	/**
+	Creates a request for the JSON file at the specified url with the mime type "application/json". If a callback is specified, the request is immediately issued with the GET method, and the callback will be invoked asynchronously when the file is loaded or the request fails; the callback is invoked with two arguments: the error, if any, and the parsed JSON. The parsed JSON is undefined if an error occurs. If no callback is specified, the returned request can be issued using xhr.get or similar, and handled using xhr.on. 
+	*/
+	@:overload(function(url:String, ?callback:XMLHttpRequest->{}->Void):XHR{})
+	static function json(url:String, mimeType:String, ?callback:XMLHttpRequest->{}->Void):XHR;
+	
+	/**
+	Creates a request for the XML file at the specified url. An optional mime type may be specified as the second argument, such as "application/xml". If a callback is specified, the request is immediately issued with the GET method, and the callback will be invoked asynchronously when the file is loaded or the request fails; the callback is invoked with two arguments: the error, if any, and the parsed XML as a document. The parsed XML is undefined if an error occurs. If no callback is specified, the returned request can be issued using xhr.get or similar, and handled using xhr.on. 
+	*/
+	@:overload(function(url:String, ?callback:XMLHttpRequest->js.html.Document->Void):XHR{})
+	static function xml(url:String, mimeType:String, ?callback:XMLHttpRequest->js.html.Document->Void):XHR;
+	
+	/**
+	Creates a request for the HTML file at the specified url with the mime type "text/html". If a callback is specified, the request is immediately issued with the GET method, and the callback will be invoked asynchronously when the file is loaded or the request fails; the callback is invoked with two arguments: the error, if any, and the parsed HTML as a document fragment. The parsed HTML is undefined if an error occurs. If no callback is specified, the returned request can be issued using xhr.get or similar, and handled using xhr.on. 
+	*/
+	static function html(url:String, ?callback:XMLHttpRequest->js.html.DocumentFragment->Void):XHR;
+	
+	/**
+	Issues an HTTP GET request for the comma-separated values (CSV) file at the specified url. The file contents are assumed to be [RFC4180-compliant](http://tools.ietf.org/html/rfc4180). The mime type of the request will be "text/csv". The request is processed asynchronously, such that this method returns immediately after opening the request. When the CSV data is available, the specified callback will be invoked with the parsed rows as the argument. If an error occurs, the callback function will instead be invoked with null. An optional accessor function may be specified, which is then passed to d3.csv.parse; the accessor may also be specified by using the return request object’s row function. For example: 
+	
+	```js
+	d3.csv("example.csv", function(d) {
+	  return {
+		year: new Date(+d.Year, 0, 1), // convert "Year" column to Date
+		make: d.Make,
+		model: d.Model,
+		length: +d.Length // convert "Length" column to number
+	  };
+	}, function(error, rows) {
+	  console.log(rows);
+	});
+	```
+	
+	See the [unemployment choropleth](http://bl.ocks.org/mbostock/4060606) for an example.
+	*/
+	//@:overload(function(url:String, ?callback:XMLHttpRequest->Array<{}>->Void):XHRR { } )	
+	//static function csv(url:String, accessor:Callb<{}->Int->Dynamic>, ?callback:XMLHttpRequest->Array<Dynamic>->Void):XHRR;
+		
+	/**
+	see csv 
+	*/
+	//@:overload(function(url:String, ?callback:XMLHttpRequest->Array<{}>->Void):XHRR { } )	
+	//static function tsv(url:String, accessor:Callb<{}->Int->Dynamic>, ?callback:XMLHttpRequest->Array<Dynamic>->Void):XHRR;
 	
 	// -=-=-=-=-=-=- d3.layout (Layouts) -=-=-=-=-=-=-
 }
