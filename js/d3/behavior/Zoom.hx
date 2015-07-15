@@ -66,8 +66,8 @@ extern class Zoom{
 	 
 	 - translate - a two-element array representing the current translation vector. 
 	*/
-	@:overload(function(type:String):Null<Callb<Dynamic->Int->Int->Void>>{})
-	function on(type:String, listener:Null<Callb<Dynamic->Int->Int->Void>>):Zoom;
+	@:overload(function(type:ZoomEventType):Null<Callb<Dynamic->Int->Int->Void>>{})
+	function on(type:ZoomEventType, listener:Null<Callb<Dynamic->Int->Int->Void>>):Zoom;
 	
 	/**
 	If selection is a selection, immediately dispatches a zoom gesture to registered listeners, as the three event sequence zoomstart, zoom and zoomend. This can be useful in triggering listeners after setting the translate or scale programatically. If selection is a transition, registers the appropriate tweens so that the zoom behavior dispatches events over the course of the transition: a zoomstart event when the transition starts from the previously-set view, zoom events for each tick of the transition, and finally a zoomend event when the transition ends. Note that the transition will be interrupted if the user starts zooming before the transition ends. 
@@ -76,7 +76,8 @@ extern class Zoom{
 	function event(selection:js.d3.Selection):Void;
 }
 
-@:enum abstract ZoomEventType(String) to String{
+@:enum abstract ZoomEventType(String) to String {
+	
 	var ZOOMSTART = "zoomstart";	// at the start of a zoom gesture (e.g., touchstart).
 	
 	var ZOOM = "zoom";				// when the view changes (e.g., touchmove).

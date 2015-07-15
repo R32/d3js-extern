@@ -44,8 +44,8 @@ extern class Drag{
 	});
 	```
 	*/
-	@:overload(function(type:String):Null<Callb<Dynamic->Int->Int->Void>>{})
-	function on(type:String, listener:Null<Callb<Dynamic->Int->Int->Void>>):Drag;
+	@:overload(function(type:DragEventType):Null<Callb<Dynamic->Int->Int->Void>>{})
+	function on(type:DragEventType, listener:Null<Callb<Dynamic->Int->Int->Void>>):Drag;
 	
 	/**
 	If origin is specified, sets the origin accessor to the specified function. If origin is not specified, returns the current origin accessor which defaults to null. 
@@ -64,6 +64,15 @@ extern class Drag{
 	zh-CN: 在元素开始 dragged 时,  accessor 需要返回包含了 x,y 属性的对象,用于得到相对的起始坐标.
 	*/
 	function origin(?accessor:Null<Callb<Dynamic->Int->Int->{x:Int,y:Int}>>):Drag;
+}
+
+@:enum abstract DragEventType(String) to String {
+	
+	var DRAG = "drag";
+	
+	var DRAGSTART = "dragstart";
+	
+	var DRAGEND = "dragend";
 }
 
 /**
