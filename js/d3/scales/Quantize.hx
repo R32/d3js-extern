@@ -14,7 +14,7 @@ extern class Quantize{
 	q(0.3) === "a"; 		// haxe: q.selfCall(0.3) == "a"
 	```
 	*/
-	@:selfCall function selfCall(x:Float):Primitive;
+	@:selfCall function selfCall(x:Float):Dynamic;
 	
 	/**
 	Returns the extent of values in the input domain [x0, x1] for the corresponding value in the output range y, representing the inverse mapping from range to domain. 
@@ -23,7 +23,7 @@ extern class Quantize{
 	
 	`q.invertExtent('a') == [0, 0.3333333333333333]`
 	*/
-	function invertExtent(y:Primitive):Array<Float>;
+	function invertExtent(y:Dynamic):Array<Float>;
 	
 	/**
 	If numbers is specified, sets the scale's input domain to the specified two-element array of numbers. If the array contains more than two numbers, only the first and last number are used. If the elements in the given array are not numbers, they will be coerced to numbers; this coercion happens similarly when the scale is called. Thus, a quantize scale can be used to encode any type that can be converted to numbers. If numbers is not specified, returns the scale's current input domain. 
@@ -34,8 +34,8 @@ extern class Quantize{
 	/**
 	If values is specified, sets the scale's output range to the specified array of values. The array may contain any number of discrete values. The elements in the given array need not be numbers; any value or type will work. If values is not specified, returns the scale's current output range.
 	*/
-	@:override(function():Array<Primitive>{})
-	function range(range:Array<Primitive>):Quantize;
+	@:override(function():Array<Dynamic>{})
+	function range(range:Array<Dynamic>):Quantize;
 	
 	/**
 	Returns an exact copy of this scale. Changes to this scale will not affect the returned scale, and vice versa. 
