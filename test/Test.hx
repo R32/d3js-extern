@@ -61,7 +61,8 @@ class Test{
 		var dateutc = D3.time.day.utc.selfCall(Date.now());
 		var scale = D3.time.scale();
 		scale.domain([untyped __js__('new Date("2015-1-1")'), Date.now()]);
-		var range = scale.ticks(D3.time.day, 31);
+		var range = scale.ticks(D3.time.week.utc,5);
+		range = scale.ticks(D3.time.day, 31);	
 		trace(range);
 	}
 	

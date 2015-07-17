@@ -53,7 +53,9 @@ extern class Enter<T> extends JSArray<T>{
 	/**
 	Invokes the specified function once, passing in the current selection along with any optional arguments
 	
-	`.call(foo, 1,2,3) => foo(Selection,1,2,3)` 
+	`.call(foo, 1,2,3) => foo(Selection,1,2,3)`
+	
+	zh-CN: 在 haxe 中,注意 当func为成员方法时,注意 成员方法是否会被 $bind 绑定 context, 静态方法或变量形式函数则无需关心这些.
 	*/
 	function call(func:Callb<Selection->Void>, args:haxe.extern.Rest<Dynamic>):Selection;
 	

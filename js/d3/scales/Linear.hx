@@ -19,7 +19,7 @@ extern class Linear{
 
 	Note: the invert operator is only supported if the output range is numeric! D3 allows the output range to be any type; under the hood, d3.interpolate or a custom interpolator of your choice is used to map the normalized parameter t to a value in the output range. Thus, the output range may be colors, strings, or even arbitrary objects. As there is no facility to "uninterpolate" arbitrary types, the invert operator is currently supported only on numeric ranges. 
 	
-	zh-CN: 仅支持数字形式的 range
+	zh-CN: 需要 Number 类型的 range.
 	*/
 	function invert(y:Float):Float;
 	
@@ -41,6 +41,8 @@ extern class Linear{
 	
 	/**
 	If values is specified, sets the scale's output range to the specified array of values. The array must contain two or more values, to match the cardinality of the input domain, otherwise the longer of the two is truncated to match the other. The elements in the given array need not be numbers; any value that is supported by the underlying interpolator will work. However, numeric ranges are required for the invert operator. If values is not specified, returns the scale's current output range. 
+	
+	zh-cn: 虽然支持任意类型,但是 .invert 只支持 Number 类型.
 	*/
 	@:override(function():Array<Dynamic> { } )
 	function range(range:Array<Dynamic>):Linear;

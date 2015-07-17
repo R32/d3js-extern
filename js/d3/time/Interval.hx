@@ -12,11 +12,6 @@ https://github.com/mbostock/d3/wiki/Time-Intervals
 extern class Interval extends IntervalUtc{
 	
 	/**
-	Alias for interval.floor(date). For example, d3.time.day(new Date()) returns midnight (12:00 AM) on the current day, in local time. 
-	*/
-	@:selfCall override function selfCall(d:Date):Date;
-	
-	/**
 	IntervalUtc
 	*/
 	var utc(default,null):IntervalUtc;
@@ -25,7 +20,7 @@ extern class Interval extends IntervalUtc{
 extern class IntervalUtc {
 
 	/**
-	Returns a corresponding time interval in UTC rather than local time. For example, d3.time.day.range(start, stop) returns local time days between start and stop, while d3.time.day.utc.range(start, stop) returns UTC days between start and stop. 
+	Alias for interval.floor(date). For example, d3.time.day(new Date()) returns midnight (12:00 AM) on the current day, in local time.
 	*/
 	@:selfCall function selfCall(d:Date):Date;
 	
@@ -60,11 +55,6 @@ extern class IntervalUtc {
 
 
 extern class Intervals extends IntervalUtcs{
-	
-	/**
-	Alias for Interval.range 
-	*/
-	@:selfCall override function selfCall(start:Date, stop:Date, step:Float = 1):Array<Date>;
 	
 	/**
 	Returns a corresponding time interval in UTC rather than local time. For example, d3.time.day.range(start, stop) returns local time days between start and stop, while d3.time.day.utc.range(start, stop) returns UTC days between start and stop. 
