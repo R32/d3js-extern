@@ -103,7 +103,7 @@ https://github.com/mbostock/d3/wiki/API-Reference
  
  - [x] Internals - `js.d3.Dispatch` For haxe is, this stuff seems not very useful
  
- - [ ] d3.scale (Scales)
+ - [x] d3.scale (Scales)
  
   - [x] Quantitative
   
@@ -117,13 +117,13 @@ https://github.com/mbostock/d3/wiki/API-Reference
    
    - [ ] Controls
    
- - [ ] d3.time (Time) - `js.d3.Time, js.d3.time.*`
+ - [x] d3.time (Time) - `js.d3.Time, js.d3.time.*`
  
   - [x] Time Formatting
   
-  - [ ] Time Scales
+  - [x] Time Scales
   
-  - [ ] Time Intervals
+  - [x] Time Intervals
   
  - [ ] d3.layout (Layouts)
  

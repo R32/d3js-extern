@@ -17,6 +17,7 @@ import js.d3.behavior.Drag;
 import js.d3.behavior.Zoom;
 import js.d3.XHR;
 import js.d3.format.*;
+import js.d3.scales.*;
 
 class Test{
 	
@@ -50,15 +51,35 @@ class Test{
 		testColor();
 		testDrag(); 
 		testZoom();
-		testXhr();
-		
-
+		testMisc();
+		testTime();
+		//testXhr();
+	}
+	
+	static function testTime(){		
+		var date = D3.time.day.selfCall(Date.now());
+		var dateutc = D3.time.day.utc.selfCall(Date.now());
+		var scale = D3.time.scale();
+		scale.domain([untyped __js__('new Date("2015-1-1")'), Date.now()]);
+		var range = scale.ticks(D3.time.day, 31);
+		trace(range);
+	}
+	
+	static function testMisc(){
 		trace(D3.ns.qualify("svg:text").space);
 		D3.timer.selfCall(function() { return true; } );
-		D3.timer.flush();
-		
+		D3.timer.flush();	
 		var dp:Dispatch = D3.dispatch("hi", "bye");
 		dp.hi().hi();
+		
+		var le = D3.scale.linear();
+		le.interpolate(D3.interpolateRound);
+		le.range([0, 1]);
+		trace("linear: " + untyped le.selfCall(0.5));
+		
+		var pow = D3.scale.sqrt();
+		var log = D3.scale.log();
+		
 	}
 	
 	static function testXhr(){
@@ -156,7 +177,7 @@ class Test{
 			}).transition().delay(2000).text(function(d) { return d; } ).style("color", "#a71d5d");
 			
 		
-		D3.select("#piece").transition().delay(200).duration(1000).ease(EaseType.LinearIn).style("left", (width - 100)+"px");
+		D3.select("#piece").transition().delay(200).duration(1000).ease(EaseType.LinearIn).style("left", (width - 120)+"px");
 		
 		trace('"d3.selection().node() == d3.transition().node()\": ' + untyped (D3.selection().node() == D3.transition().node()));
 		
