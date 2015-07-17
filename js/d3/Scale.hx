@@ -3,8 +3,9 @@ package js.d3;
 
 import js.d3.scales.*;
 /**
+https://github.com/mbostock/d3/wiki/Scales
 
-zh-CN: .domain 用于确定输入值, .ticks 处理 .domain 的范围值
+zh-CN: .domain 用于确定输入值, .ticks 处理 .domain 的范围值. range 作为输出值
 */
 extern class Scale{
 
@@ -27,6 +28,23 @@ extern class Scale{
 	构建一个分位数比例尺
 	*/
 	function quantile():Quantile;
+	
+	/**
+	Constructs a new threshold scale with the default domain [.5] and the default range [0,1]. Thus, the default threshold scale is equivalent to the round function for numbers; for example threshold(0.49) returns 0, and threshold(0.51) returns 1.
+
+	```js
+	var t = d3.scale.threshold().domain([0, 1]).range(['a', 'b', 'c']); 
+	t(-1) === 'a';
+	t(0) === 'b';
+	t(0.5) === 'b';
+	t(1) === 'c';
+	t(1000) === 'c';
+	t.invertExtent('a'); //returns [undefined, 0]
+	t.invertExtent('b'); //returns [0, 1]
+	t.invertExtent('c'); //returns [1, undefined]
+	```
+	*/
+	function threshold():Threshold;
 	
 	/**
 	Constructs a new identity scale with the default domain [0, 1] and the default range [0, 1]. An identity scale is always equivalent to the identity function. 
@@ -60,4 +78,35 @@ extern class Scale{
 	Constructs a new log scale with the default domain [1,10], the default range [0,1], and the base 10. 
 	*/
 	function log():Log;
+	
+	/**
+	Constructs a new ordinal scale with an empty domain and an empty range. The ordinal scale is invalid (always returning undefined) until an output range is specified. 
+	*/
+	function ordinal():Ordinal;
+	
+	
+	/**
+	https://github.com/mbostock/d3/wiki/Ordinal-Scales#categorical-colors
+	
+	Constructs a new ordinal scale with a range of ten categorical colors:
+	*/
+	function category10():Ordinal;
+	
+	/**
+	Constructs a new ordinal scale with a range of twenty categorical colors: 
+	*/
+	function category20():Ordinal;
+	
+	
+	/**
+	Constructs a new ordinal scale with a range of twenty categorical colors: 
+	*/
+	function category20b():Ordinal;
+	
+	/**
+	Constructs a new ordinal scale with a range of twenty categorical colors: 
+	*/
+	function category20c():Ordinal;
+	
+	
 }

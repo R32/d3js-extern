@@ -105,9 +105,9 @@ https://github.com/mbostock/d3/wiki/API-Reference
  
  - [ ] d3.scale (Scales)
  
-  - [ ] Quantitative
+  - [x] Quantitative
   
-  - [ ] Ordinal
+  - [x] Ordinal
    
  - [ ] d3.svg (SVG)
  
