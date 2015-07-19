@@ -22,7 +22,7 @@ extern class IntervalUtc {
 	/**
 	Alias for interval.floor(date). For example, d3.time.day(new Date()) returns midnight (12:00 AM) on the current day, in local time.
 	*/
-	@:selfCall function selfCall(d:Date):Date;
+	@:selfCall var selfCall(default, null):Date-> Date;
 	
 	/**
 	Rounds down the specified date, returning the latest time interval before or equal to date. For example, d3.time.day.floor(new Date()) returns midnight (12:00 AM) on the current day, in local time. 
@@ -64,7 +64,7 @@ extern class Intervals extends IntervalUtcs{
 
 extern class IntervalUtcs {
 	/**
-	Alias for IntervalUtc.range 
+	Alias for IntervalUtc.range. `function selfCall(start:Date, stop:Date, step:Float = 1):Array<Date>;`
 	*/
-	@:selfCall function selfCall(start:Date, stop:Date, step:Float = 1):Array<Date>;
+	@:selfCall var selfCall(default, null):Callb<Date->Date->Float->Array<Date>>;
 }
