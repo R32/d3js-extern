@@ -20,4 +20,3 @@ In JavaScript, there are 6 primitive data types:
  * symbol (new in ECMAScript 6)
 */
 typedef Primitive = Null<EitherType<String,EitherType<Float,EitherType<Int,Bool>>>>;
-

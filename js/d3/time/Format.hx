@@ -102,7 +102,8 @@ format(new Date(2011, 0, 1)); // returns a string
 	
 	If you prefer to be explicit, you can also use the date object's getTime method, but the + operator is shorter and possibly faster.
 	*/
-	@:selfCall function selfCall(date:Date):String;
+	@:selfCall var selfCall(default, null):Date-> String;
+	//@:selfCall function selfCall(date:Date):String;
 	
 	
 	/**

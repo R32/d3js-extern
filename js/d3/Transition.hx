@@ -244,7 +244,9 @@ extern class Transition extends JSArray<JSArray<js.html.Node>>{
 	function size():Int;
 }
 
-
+/**
+Given a parameter t typically in the range [0,1], returns the associated interpolation value 
+*/
 typedef InterpFunction<T> = Float->T;
 
 /**
