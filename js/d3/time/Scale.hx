@@ -34,7 +34,7 @@ A scale object, such as that returned by d3.time.scale, is both an object and a 
 	
 	zh-CN: 如果 domain 有超过二个值, 那么仅处理第一个与最后一个元素. Interval 继承自 IntervalUtc, 使用 D3.time.day 或 D3.time.second 之类的字段
 	*/
-	@:overload(function(interval:IntervalUtc, step:Float = 1):Scale { } )	
+	@:overload(function(interval:IntervalUtc, ?step:Float = 1):Scale { } )
 	function nice(count:Int = 10):Scale;
 	
 	/**
@@ -101,7 +101,7 @@ A scale object, such as that returned by d3.time.scale, is both an object and a 
 	
 	NOTE: in haxe, use D3.time.day or D3.time.minute... `class Interval inherit from IntervalUtc`
 	*/
-	@:overload(function(interval:IntervalUtc, step:Float = 1):Array<Date> { } )
+	@:overload(function(interval:IntervalUtc, ?step:Float = 1):Array<Date> { } )
 	function ticks(count:Int = 10):Array<Date>;
 	
 	/**

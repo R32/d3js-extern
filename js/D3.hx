@@ -27,6 +27,7 @@ import js.d3.math.*;
 import js.d3.format.*;		// csv, tsv, xhrr
 import js.d3.Scale;
 import js.d3.scales.*;
+import js.d3.Svg;
 import js.d3.Geo;
 
 typedef Number = Null<haxe.extern.EitherType<Int,Float>>;
@@ -339,8 +340,8 @@ extern class D3{
 	
 	Unlike the Python version, the arguments are not required to be integers, though the results are more predictable if they are due to floating point precision. If step is omitted, it defaults to 1. If start is omitted, it defaults to 0. The stop value is not included in the result. The full form returns an array of numbers [start, start + step, start + 2 * step, …]. If step is positive, the last element is the largest start + i * step less than stop; if step is negative, the last element is the smallest start + i * step greater than stop. If the returned array would contain an infinite number of values, an error is thrown rather than causing an infinite loop. 
 	*/
-	@:overload(function(stop:Number, step:Number = 1):Array<Number>{})
-	static function range(start:Number, stop:Number, step:Number = 1):Array<Number>;
+	@:overload(function(stop:Number, ?step:Number = 1):Array<Number> { } )
+	static function range(start:Number, stop:Number, ?step:Number = 1):Array<Number>;
 	
 	/**
 	Returns a permutation of the specified array using the specified array of indexes. The returned array contains the corresponding element in array for each index in indexes, in order. For example, `permute(["a", "b", "c"], [1, 2, 0]) returns ["b", "c", "a"]`. It is acceptable for the array of indexes to be a different length from the array of elements, and for indexes to be duplicated or omitted.
@@ -762,25 +763,6 @@ extern class D3{
 	static function requote(s:String):String;
 	
 	
-	// -=-=-=-=-=-=- Time Formatting -=-=-=-=-=-=-
-	
-	/**
-	time format 
-	*/
-	static var time(default, null):Time;
-	
-	
-	// -=-=-=-=-=-=- Localization -=-=-=-=-=-=-
-	
-	/**
-	Returns a new locale given the specified definition. 
-	*/
-	static function locale(definition:LocaleDef):Locale;
-	
-	
-	// -=-=-=-=-=-=- Behaviors -=-=-=-=-=-=-
-	
-	static var behavior(default, null):Behavior;
 	
 	// -=-=-=-=-=-=- Geo Paths -=-=-=-=-=-=-
 	/**
@@ -839,15 +821,26 @@ extern class D3{
 	//static function tsv(url:String, accessor:Callb<{}->Int->Dynamic>, ?callback:XMLHttpRequest->Array<Dynamic>->Void):XHRR;
 	
 	
-	// -=-=-=-=-=-=- Namespaces -=-=-=-=-=-=-
+	//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+	
+	/**
+	Returns a new locale given the specified definition. 
+	*/
+	static function locale(definition:LocaleDef):Locale;	// Localization
+
+	
+	static var behavior(default, null):Behavior;			// Behaviors
 	
 	
-	static var ns(default,null):Namespace;
+	static var ns(default,null):Namespace;					// Namespaces
 	
 	
-	// -=-=-=-=-=- d3.scale (Scales) -=-=-=-=-=-
+	static var scale(default, null):Scale;					// d3.scale (Scales)
 	
-	static var scale(default, null):Scale;
 	
-	// -=-=-=-=-=-=- d3.layout (Layouts) -=-=-=-=-=-=-
+	static var time(default, null):Time;					// Time Formatting
+	
+	
+	static var svg(default, null):Svg;						// d3.svg (SVG)
+	
 }
