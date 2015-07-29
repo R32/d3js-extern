@@ -20,6 +20,7 @@ import js.d3.XHR;
 import js.d3.format.*;
 import js.d3.scales.*;
 import js.d3.svg.Line;
+import js.d3.svg.Area;
 
 class Test{
 	
@@ -66,7 +67,12 @@ class Test{
 		
 		var line = D3.svg.line()
 		.x(function(d) { return d.x; } ).y(function(d) { return d.y; } ).interpolate(LineInterpMod.BASIS);
-		D3.select("#csvg").datum(data).append("path").classed("line",true).attr("d", line.selfCall);
+		D3.select("#csvg").datum(data).append("path").classed("line", true).attr("d", line.selfCall);
+		
+		
+		var area = D3.svg.area()
+		.x(function(d) { return d.x * .5 ; } ).y0(150).y1(function(d) { return d.y * .5; } ).interpolate(LineInterpMod.BASIS);
+		D3.select("#csvg").datum(data).append("path").classed("line", true).attr("d", area.selfCall);
 	}
 	
 	static function testTime() {

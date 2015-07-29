@@ -1,5 +1,6 @@
 package js.d3;
 
+import js.d3.svg.Area;
 import js.d3.svg.Line;
 
 /**
@@ -24,4 +25,9 @@ extern class Svg{
 	The line generator is designed to work in conjunction with the area generator. For example, when producing an area chart, you might use an area generator with a fill style, and a line generator with a stroke style to emphasize the top edge of the area. Since the line generator is only used to set the d attribute, you can control the appearance of the line using standard SVG styles and attributes, such as fill, stroke and stroke-width.
 	*/
 	function line():Line;
+	
+	/**
+	Constructs a new area generator with the default x-, y0- and y1-accessor functions (that assume the input data is a two-element array of numbers; see below for details), and linear interpolation. The returned function generates path data for a closed piecewise linear curve, or polygon, as in an area chart: 
+	*/
+	function area():Area;
 }
