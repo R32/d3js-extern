@@ -81,7 +81,7 @@ https://github.com/mbostock/d3/wiki/API-Reference
   
    - [x] Ease - `js.d3.FlxEase`
   
-  - [x] Timers - `d3.timer, d3.timerFlush`
+  - [x] Timers - `d3.timer`
   
   - [x] Interpolation
  

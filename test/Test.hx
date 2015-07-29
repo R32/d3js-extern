@@ -1,5 +1,6 @@
 package test;
 
+import haxe.Constraints.Function;
 import js.Browser;
 import js.Callb;
 import js.d3.Color;
@@ -18,6 +19,7 @@ import js.d3.behavior.Zoom;
 import js.d3.XHR;
 import js.d3.format.*;
 import js.d3.scales.*;
+import js.d3.svg.Line;
 
 class Test{
 	
@@ -54,16 +56,32 @@ class Test{
 		testMisc();
 		testTime();
 		//testXhr();
+		testSvgLine();
 	}
 	
-	static function testTime(){		
-		var date = D3.time.day.selfCall(Date.now());
-		var dateutc = D3.time.day.utc.selfCall(Date.now());
+	static function testSvgLine(){
+		var data = D3.range(20).map(function(n) { 
+			return {x: n / 19 * 500, y: (Math.sin(n / 3) + 2) / 4 * 300};
+		} );
+		
+		var line = D3.svg.line()
+		.x(function(d) { return d.x; } ).y(function(d) { return d.y; } ).interpolate(LineInterpMod.BASIS);
+		D3.select("#csvg").datum(data).append("path").classed("line",true).attr("d", line.selfCall);
+	}
+	
+	static function testTime() {
+		var data = [untyped __js__('new Date("2015-1-1")'), Date.now()];
+		var date = D3.time.day.selfCall(data[1]);
+		var dateutc = D3.time.day.utc.selfCall(data[0]);
 		var scale = D3.time.scale();
-		scale.domain([untyped __js__('new Date("2015-1-1")'), Date.now()]);
+		scale.domain(data);
 		var range = scale.ticks(D3.time.week.utc,5);
 		range = scale.ticks(D3.time.day, 31);	
 		trace(range);
+		
+		function(callb:Function){
+			(callb(data[0], data[1]));
+		}(D3.time.days.selfCall);
 	}
 	
 	static function testMisc(){

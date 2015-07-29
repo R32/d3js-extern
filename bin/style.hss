@@ -48,7 +48,14 @@ div.header{
 
 
 #content{
+	min-width:980px;
+}
 
+div.mainContainer{
+	
+	.column{
+		float: left;
+	}
 }
 
 #piece{
@@ -74,4 +81,12 @@ div.header{
 	font-size:2em;
 	line-height:92px;
 	text-align:center;
+}
+
+.line {
+  @include("{
+	 fill: none;
+	stroke: steelblue;
+	stroke-width: 1.5px;  
+  }")
 }

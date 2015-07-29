@@ -15,18 +15,20 @@
         </ul>
     </div>
 	
-	<div id="content" class="mainContainer">
-		<h2><font>Hello world</font></h2>
-		<p>我愈陷愈深愈迷惘</p>
-		<p class="second">路愈走愈远愈漫长</p>
-		<p class="thrid">如何我才能捉住你眼光</p>
+	<div id="content" class="mainContainer cf">
+		<div class="column" style="width:33%">
+			<h2><font>Hello world</font></h2>
+			<p>我愈陷愈深愈迷惘</p>
+			<p class="second">路愈走愈远愈漫长</p>
+			<p class="thrid">如何我才能捉住你眼光</p>
+		</div>
+		<div class="column" style="width:66%">
+			<svg id="csvg" width="500" height="300" style="background-color:#000000;">
+				<circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red"/>
+			</svg>
+		</div>
 	</div>
-	
-
 	<div id="piece"><font color="#ffffff">Piece</font></div>
-
-	<div id="drag">Drag</div>
-
 	<script type="text/javascript" src="d3.js"></script>
 	<script type="text/javascript" src="test.js"></script>
 </body>

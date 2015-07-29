@@ -29,6 +29,12 @@ div.header br.clearFloat {
 	clear : both;
 	height : 1px;
 }
+#content {
+	min-width : 980px;
+}
+div.mainContainer .column {
+	float : left;
+}
 #piece {
 	display : block;
 	width : 100px;
@@ -54,3 +60,8 @@ div.header br.clearFloat {
 	line-height : 92px;
 	text-align : center;
 }
+.line {
+	 fill: none;
+	stroke: steelblue;
+	stroke-width: 1.5px;  
+  }
