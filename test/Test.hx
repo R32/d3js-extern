@@ -1,4 +1,4 @@
-package test;
+package;
 
 import haxe.Constraints.Function;
 import js.Browser;
@@ -71,8 +71,11 @@ class Test{
 		
 		
 		var area = D3.svg.area()
-		.x(function(d) { return d.x * .5 ; } ).y0(150).y1(function(d) { return d.y * .5; } ).interpolate(LineInterpMod.BASIS);
-		D3.select("#csvg").datum(data).append("path").classed("line", true).attr("d", area.selfCall);
+		.x(function(d) { return d.x * .5 ; } ).y0(function(d) { return d.y * 0.5 + 50; }).y1(function(d) { return d.y * .5; } ).interpolate(LineInterpMod.BASIS);
+		D3.select("#csvg").append("path").classed("line", true).attr("d", area.selfCall);
+		
+		var arc = D3.svg.arc();
+		D3.select("#csvg").append("path").classed("line", true).attr("d", arc.selfCall);
 	}
 	
 	static function testTime() {
